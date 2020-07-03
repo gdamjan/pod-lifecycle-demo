@@ -1,0 +1,10 @@
+<html>
+<form>
+   <h1>Version {{ GLOBAL_STATE.version }}</h1>
+   Counter: {{ GLOBAL_STATE.counter }}
+   <button formaction='increment' formmethod='post'>+</button>
+   <button formaction='decrement' formmethod='post'>-</button>
+   <hr>
+   <button formaction='hang' formmethod='post'>Hang</button>
+   <button formaction='shutdown' formmethod='post'>Shutdown</button>
+</html>

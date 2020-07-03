@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-node
+  labels:
+    app: demo-node
+spec:
+  selector:
+    matchLabels:
+      app: demo-node
+  template:
+    metadata:
+      labels:
+        app: demo-node
+    spec:
+      containers:
+      # let's update the image and see how the update rolls
+      - image: 192.168.39.39:5000/demo-img:v2
+        imagePullPolicy: Always
+        name: demo-img
+        livenessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 20
+          periodSeconds: 3
+          failureThreshold: 10
+        env:
+          - name: CONFIG_INIT_DELAY
+            value: "20"
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 7
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 20
+          periodSeconds: 3
+          failureThreshold: 2
+      restartPolicy: Always

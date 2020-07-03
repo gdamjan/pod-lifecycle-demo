@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-node
+  labels:
+    app: demo-node
+spec:
+  selector:
+    matchLabels:
+      app: demo-node
+  template:
+    metadata:
+      labels:
+        app: demo-node
+    spec:
+      containers:
+      - image: 192.168.39.39:5000/demo-img:v1
+        imagePullPolicy: Always
+        name: demo-img
+      restartPolicy: Always
