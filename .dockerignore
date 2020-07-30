@@ -1,0 +1,6 @@
+*
+## explicit list of files/directories to be sent in the docker build context:
+!setup.py
+!MANIFEST.in
+!demo/
+**/__pycache__
